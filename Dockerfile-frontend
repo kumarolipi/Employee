@@ -1,0 +1,30 @@
+# Use a lightweight web server as a base image
+FROM nginx:alpine
+
+# Set the working directory in the container
+WORKDIR /usr/share/nginx/html
+
+# Copy the frontend files into the container
+COPY ./frontend /usr/share/nginx/html
+
+# Expose port 80 to the outside world
+EXPOSE 80
+
+# Command to run the web server
+CMD ["nginx", "-g", "daemon off;"]
+
+
+# Use a PHP-Apache base image
+FROM php:7.4-apache
+
+# Set the working directory in the container
+WORKDIR /var/www/html
+
+# Copy the backend files into the container
+COPY ./backend /var/www/html
+
+# Expose port 80 to the outside world
+EXPOSE 80
+
+# Command to run Apache
+CMD ["apache2-foreground"]
